@@ -5,7 +5,7 @@ Diseñé la mayoría de los componentes para agregar funcionalidades a dos progr
 
 Los dos scripts más complejos son:
 - */configuraciones/lemonbar.sh*
-- */configuraciones/rapoisonrc*
+- */configuraciones/ratpoisonrc*
 
 Ratpoison es un administrador de ventanas minimalista. Un administrador de ventanas cumple la función de decidir cómo se comportan las ventanas en un escritorio, y generalmente de iniciar programas y mostrar informaciones.
 
