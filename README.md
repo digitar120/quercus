@@ -9,6 +9,6 @@ Los dos scripts más complejos son:
 
 Ratpoison es un administrador de ventanas minimalista. Un administrador de ventanas cumple la función de decidir cómo se comportan las ventanas en un escritorio, y generalmente de iniciar programas y mostrar informaciones.
 
-Lemonbar es una barra de estado, que da una función parecida a la barra de tareas en Windows, por ejemplo.
+Lemonbar es una barra de estado, que da una función parecida a la barra de tareas en Windows.
 
 *No uso estos scripts hace bastante tiempo, y para archivarlos en Github los organicé en carpetas. Esto rompe muchas de las funciones.*
