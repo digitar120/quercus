@@ -1,0 +1,39 @@
+#
+# /etc/bash.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+[[ $DISPLAY ]] && shopt -s checkwinsize
+
+PS1='[\u@\h \W]\$ '
+
+case ${TERM} in
+  xterm*|rxvt*|Eterm|aterm|kterm|gnome*)
+    PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND; }'printf "\033]0;%s@%s:%s\007" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/\~}"'
+
+    ;;
+  screen*)
+    PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND; }'printf "\033_%s@%s:%s\033\\" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/\~}"'
+    ;;
+esac
+
+[ -r /usr/share/bash-completion/bash_completion   ] && . /usr/share/bash-completion/bash_completion
+
+
+
+# Apodos
+	#Devolución coloreada
+	alias ip='ip -c=always'
+	export LESS='-R --use-color -Dd+r$Du+b'
+		export MANPAGER="less -R --use-color -Dd+r -Du+b"
+	alias ls='ls --color=auto'
+	
+# Otros
+alias psg="ps aux | grep "
+alias inet="ip -color=auto a | grep inet"
+alias ..="cd .."
+alias ...="cd ../.."
+alias vi="vim"
+alias cpub="w3m -dump cpubenchmark.net/cpu_list.php | grep "

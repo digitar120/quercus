@@ -1,0 +1,83 @@
+# APARIENCIA DE RATPOISON
+set font terminus-10
+
+set fgcolor "#c5c8c6"
+set bgcolor "#1d1f21"
+
+set border 2
+set fwcolor red
+
+set bargravity c
+
+startup_message off
+
+set padding 0 38 0 0 
+
+	
+
+# ATAJOS DE RATPOISON
+escape Super_L
+
+bind s-l exec slock
+bind XF86Sleep exec slock & systemctl suspend
+bind s-XF86PowerOff exec systemctl poweroff
+
+exec /usr/bin/rpws init 4 -k
+	
+bind C-1 exec rpws 1
+bind C-2 exec rpws 2
+bind C-3 exec rpws 3
+bind C-4 exec rpws 4
+
+bind M-Right nextscreen
+bind M-Left prevscreen
+bind M-s sselect
+bind M-d sdump
+bind M-D sfdump
+
+bind s-XF86MonBrightnessUp exec ./Scripts/brillo.sh 225 
+bind s-XF86MonBrightnessDown exec ./Scripts/brillo.sh 50 
+bind XF86MonBrightnessUp exec ./Scripts/subir-brillo.sh
+bind XF86MonBrightnessDown exec ./Scripts/bajar-brillo.sh
+
+bind XF86AudioMute exec pamixer --toggle-mute && ratpoison -c "echo $(pamixer --get-mute | awk '{if ($1 == "true") print "MUTE ON"; else print "MUTE OFF"}')"
+bind XF86AudioRaiseVolume exec pamixer --set-volume $(pamixer --get-volume | awk '{print $1+10}') 
+bind XF86AudioLowerVolume exec pamixer --set-volume $(pamixer --get-volume | awk '{print $1-10}')
+bind s-XF86AudioRaiseVolume exec pamixer --set-volume 60
+bind s-XF86AudioLowerVolume exec pamixer --set-volume 10
+bind M exec pamixer --sink 1 --toggle-mute
+
+bind a exec ratpoison -c "echo $(./Scripts/información-de-estado.sh)"
+
+bind c exec xterm
+		
+bind M-1 exec Xephyr :1 -screen 1362x746 -ac -br &
+
+bind s-r exec xfce4-appfinder
+
+bind s-e exec rox
+bind e exec rox
+
+
+
+
+# CONFIGURACIÓN DE X
+exec setxkbmap latam
+exec xclip
+exec wmname Ratpoison
+exec xrdb .Xdefaults
+exec xterm -e sudo chmod 766 /sys/class/backlight/radeon_bl0/brightness && echo 75 > /sys/class/backlight/radeon_bl0/brightness
+
+exec nitrogen --restore
+
+exec lxqt-policykit-agent
+
+
+# PROGRAMAS DE LA SESIÓN
+unmanage bar
+exec /home/gabriel/.lemonbar.sh | lemonbar -p -g 802x18 -B "#1d1f21" -f Terminus:size=10 | $SHELL
+
+unmanage stalonetray
+exec stalonetray --geometry 224+802 --icon-size 18 --background "#1d1f21"
+
+exec nm-applet
