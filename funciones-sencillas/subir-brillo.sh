@@ -1,3 +1,3 @@
-OBJETIVO="/sys/class/backlight/radeon_bl0/brightness"
+. ../configuraciones/variables.sh
 
-cat $OBJETIVO | awk '{print $1+15}' > $OBJETIVO
+cat $DIRECTORIO_BRILLO | awk '{print $1+15}' > $DIRECTORIO_BRILLO

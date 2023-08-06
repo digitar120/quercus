@@ -1,7 +1,10 @@
 date "+%H:%M, %A %d de %B"
 
-BATDIR="/sys/class/power_supply/BAT1"
-cat $BATDIR/charge_now $BATDIR/charge_full $BATDIR/status | tr '\n' ' ' | awk '
+
+# Intercambiar BATDIR por DIRECTORIO_BATERIA, e importar la variable desde el archivo de configuración
+. ../configuraciones/variables.sh
+
+cat $DIRECTORIO_BATERIA/charge_now $DIRECTORIO_BATERIA/charge_full $DIRECTORIO_BATERIA/status | tr '\n' ' ' | awk '
 {
 	chargepc= int(($1/$2)*100)
 	if ($3=="Charging")
