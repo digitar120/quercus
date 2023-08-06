@@ -1,3 +1,6 @@
+# Importar llaves de configuración
+. variables.sh
+
 Reloj(){
 #  %A %d de %B -> nombre del día, día del mes, y nombre del mes
 date "+%H:%M" | \
@@ -38,8 +41,7 @@ Procesador (){
 }
 
 Bateria (){
-	BATDIR=/sys/class/power_supply/BAT0
-	cat $BATDIR/charge_now $BATDIR/charge_full $BATDIR/status | tr '\n' ' ' | \
+	cat $DIRECTORIO_BATERIA/charge_now $DIRECTORIO_BATERIA/charge_full $DIRECTORIO_BATERIA/status | tr '\n' ' ' | \
 	awk '{
 		cargapc=int(($1/$2)*100)
 		print "%{F#BEBEBE}BAT%{F#FFFFFF}" cargapc "%{F}%{F}"
