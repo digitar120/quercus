@@ -1,11 +1,12 @@
 # Importar llaves de configuración
 . variables.sh
+	# DIR_FUNC
 
 Reloj(){
 #  %A %d de %B -> nombre del día, día del mes, y nombre del mes
 date "+%H:%M" | \
 	awk '{
-		print "%{A:xterm -e sh ./Scripts/calendario.sh:}%{F#FFFFFF}" $1 "%{A}"
+		print "%{A:xterm -e bash $DIR_FUNC/calendario.sh:}%{F#FFFFFF}" $1 "%{A}"
 	}'
 }
 	
