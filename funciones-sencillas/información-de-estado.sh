@@ -3,8 +3,11 @@ date "+%H:%M, %A %d de %B"
 
 # Intercambiar BATDIR por DIRECTORIO_BATERIA, e importar la variable desde el archivo de configuración
 . ../configuraciones/variables.sh
+CARGA_ACTUAL=$DIRECTORIO_BATERIA/charge_now
+CARGA_COMPLETA=$DIRECTORIO_BATERIA/charge_full
+ESTADO=$DIRECTORIO_BATERIA/status
 
-cat $DIRECTORIO_BATERIA/charge_now $DIRECTORIO_BATERIA/charge_full $DIRECTORIO_BATERIA/status | tr '\n' ' ' | awk '
+cat $CARGA_ACTUAL $CARGA_COMPLETA $ESTADO | tr '\n' ' ' | awk '
 {
 	chargepc= int(($1/$2)*100)
 	if ($3=="Charging")
