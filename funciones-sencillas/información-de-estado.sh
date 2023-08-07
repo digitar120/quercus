@@ -7,7 +7,10 @@ CARGA_ACTUAL=$DIRECTORIO_BATERIA/charge_now
 CARGA_COMPLETA=$DIRECTORIO_BATERIA/charge_full
 ESTADO=$DIRECTORIO_BATERIA/status
 
-cat $CARGA_ACTUAL $CARGA_COMPLETA $ESTADO | tr '\n' ' ' | awk '
+cat $CARGA_ACTUAL \
+	$CARGA_COMPLETA \
+	$ESTADO \
+	| tr '\n' ' ' | awk '
 {
 	chargepc= int(($1/$2)*100)
 	if ($3=="Charging")
