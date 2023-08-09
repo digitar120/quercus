@@ -11,4 +11,3 @@ Ratpoison es un administrador de ventanas minimalista. Un administrador de venta
 
 Lemonbar es una barra de estado, que da una función parecida a la barra de tareas en Windows.
 
-*No uso estos scripts hace bastante tiempo, y para archivarlos en Github los organicé en carpetas. Esto rompe muchas de las funciones.*
