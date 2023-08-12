@@ -13,9 +13,7 @@ NR==3 {
 	else
 		print "-"
 	
-}
-
-' | tr '\n' ' '
+}' | tr '\n' ' '
 #{
 #	if (mempc < 90 && swappc < 10)
 #		print " "
