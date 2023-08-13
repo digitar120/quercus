@@ -92,6 +92,10 @@ FullDateTime(){
 	date "+%H:%M, %A %d de %B"
 }
 
+ShortTime(){
+	date "+%H:%M"
+}
+
 IPs(){
 	ip a | awk '/inet/ && $2 !~ /127.0.0.1/ {
 		print $NF " " substr($2,1,match($2,"/")-1)

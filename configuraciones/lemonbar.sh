@@ -13,8 +13,12 @@ date "+%H:%M" | \
 	
 Volumen () {
 (pamixer --get-volume --get-mute && pamixer --source 1 --get-mute) | tr '\n' ' '  | \
-	awk '{print "%{A:xterm -e pulsemixer &:}%{F#BEBEBE}VOL%{F#FFFFFF}" $2 "%{A}"; if ($1=="true") print "%{A:pamixer --toggle-mute &:}%{F#DCDC66}PARL%{A}";
- 	if ($3=="false") print "%{A:pamixer --source 1 --toggle-mute &:}%{F#DCDC66}MICR%{A}"}' | tr '\n' ' '
+	awk '{
+		print "%{A:xterm -e pulsemixer &:}%{F#BEBEBE}VOL%{F#FFFFFF}" $2 "%{A}"; 
+		if ($1=="true") print "%{A:pamixer --toggle-mute &:}%{F#DCDC66}PARL%{A}";
+ 		if ($3=="false") print "%{A:pamixer --source 1 --toggle-mute &:}%{F#DCDC66}MICR%{A}"
+ 		}' \ 
+ 	| tr '\n' ' '
 }
 
 
