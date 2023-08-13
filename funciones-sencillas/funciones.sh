@@ -95,7 +95,15 @@ ClimaPrint(){
 	echo $CLIMA
 }
 
+Calendar(){
+	cal
+	read -p "Presione cualquier tecla para cerrar."
+}
+
 case $1 in
+	cal)
+		Calendar
+	;;
 	proc)
 	case $2 in
 		warn)
