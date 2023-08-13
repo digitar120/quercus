@@ -1,17 +1,36 @@
 . ../configuraciones/variables.sh
 
-BatStatus(){
-local CARGA_ACTUAL=$DIRECTORIO_BATERIA/charge_now
-local CARGA_COMPLETA=$DIRECTORIO_BATERIA/charge_full
-local ESTADO=$DIRECTORIO_BATERIA/status
+BR_DIR=$DIRECTORIO_BRILLO/brightness
+BR=$(cat $DIRECTORIO_BRILLO/brightness)
+BRM=$(cat $DIRECTORIO_BRILLO/max_brightness)
+BRS=$(cat $DIRECTORIO_BRILLO/device/status)
 
-cat $CARGA_ACTUAL \
-	$CARGA_COMPLETA \
-	$ESTADO \
+# No se pueden usar los parámetros dados desde dentro de una función
+OPT_1=$1
+OPT_2=$2
+OPT_3=$3
+
+
+BrGet(){
+	cat $BR_DIR
+}
+
+BrSet(){
+	echo $OPT_3 > $BR_DIR
+}
+
+BrAdd(){
+	awk -v br=$BR -v val=$OPT_3 'BEGIN {print br + val}' > $BR_DIR
+}
+
+BatStatus(){
+echo $BR \
+	$BRM \
+	$BRS \
 	| tr '\n' ' ' | awk '
 		{
 			chargepc= int(($1/$2)*100)
-			if ($3=="Charging")
+			if ($3=="connected")
 				print "BAT " chargepc ", CARGANDO"
 
 			else
@@ -100,7 +119,25 @@ Calendar(){
 	read -p "Presione cualquier tecla para cerrar."
 }
 
+
+
 case $1 in
+	br)
+		case $2 in
+			get)
+				BrGet
+			;;
+			"set")	
+				BrSet
+			;;
+			add)
+				BrAdd
+			;;
+			*)
+				exit 1
+			;;
+		esac
+	;;
 	cal)
 		Calendar
 	;;
