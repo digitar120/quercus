@@ -1,0 +1,12 @@
+[Unit]
+Description=Timer para script de sincronización de Obsidian Main
+Requires=obsidian-sync.service
+
+[Timer]
+Unit=obsidian-sync.service
+OnCalendar=*-*-* *:*:00
+
+[Install]
+WantedBy=timers.target
+After=network-online.target
+Wants=network-online.target
