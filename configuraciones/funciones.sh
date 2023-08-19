@@ -178,6 +178,9 @@ case $1 in
 		full)
 			FullDateTime
 		;;
+		short)
+			ShortTime
+		;;
 		*)
 			exit 1
 		;;
