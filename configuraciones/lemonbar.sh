@@ -3,21 +3,26 @@
 	# DIR_FUNC
 
 Reloj(){
-#  %A %d de %B -> nombre del día, día del mes, y nombre del mes
-date "+%H:%M" | \
+. funciones.sh date short | \
 	awk '{
-		print "%{A:xterm -e bash $DIR_FUNC/calendario.sh:}%{F#FFFFFF}" $1 "%{A}"
+		print "%{A:xterm -e bash funciones.sh cal:}%{F#FFFFFF}" $1 "%{A}"
 	}'
 }
 	
 	
 Volumen () {
-(pamixer --get-volume --get-mute && pamixer --source 1 --get-mute) | tr '\n' ' '  | \
+(pamixer --get-volume --get-mute && pamixer --source 1 --get-mute) 
+	| tr '\n' ' '  | \
+	
 	awk '{
 		print "%{A:xterm -e pulsemixer &:}%{F#BEBEBE}VOL%{F#FFFFFF}" $2 "%{A}"; 
-		if ($1=="true") print "%{A:pamixer --toggle-mute &:}%{F#DCDC66}PARL%{A}";
+		if ($1=="true") print "%{A:bash pamixer --toggle-mute &:}%{F#DCDC66}PARL%{A}";
+			# Si el parlante por defecto está silenciado, mostrar una alerta.
+			
  		if ($3=="false") print "%{A:pamixer --source 1 --toggle-mute &:}%{F#DCDC66}MICR%{A}"
+ 			# Si el micrófono por defecto NO está silenciado, mostrar una alerta.
  		}' \ 
+ 	
  	| tr '\n' ' '
 }
 
