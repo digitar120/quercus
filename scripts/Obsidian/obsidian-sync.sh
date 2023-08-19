@@ -5,10 +5,10 @@ PROVIDER=
 
 case $1 in
 	"exec")
-		rclone bisync $PROVIDER:$REMOTE_VAULT $LOCAL_VAULT
+		rclone bisync $PROVIDER:"$REMOTE_VAULT" "$LOCAL_VAULT"
 	;;
 	resync)
-		rclone bisync --resync $PROVIDER:$REMOTE_VAULT $LOCAL_VAULT
+		rclone bisync --resync $PROVIDER:"$REMOTE_VAULT" "$LOCAL_VAULT"
 	;;
 	*)
 		exit 1
