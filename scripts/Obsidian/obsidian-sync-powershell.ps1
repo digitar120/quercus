@@ -4,7 +4,7 @@ $PROVIDER=""
 
 Switch ($args[0])
 {
-    exec 	{rclone bisync ${PROVIDER}:${REMOTE_VAULT} $LOCAL_VAULT}
+    exec 	{while ($true){rclone bisync ${PROVIDER}:${REMOTE_VAULT} $LOCAL_VAULT}}
     resync 	{rclone bisync --resync ${PROVIDER}:${REMOTE_VAULT} $LOCAL_VAULT}
     default {exit 1}
 }
