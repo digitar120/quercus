@@ -73,7 +73,7 @@ Clima () {
 	
 while true;
 	do
-	echo $(Reloj) $(Bateria) $(Volumen) $(Procesador) $(Memoria);
-	# $(Clima) 
+	echo $(Reloj) $(Bateria) $(Procesador) $(Memoria);
+	# $(Clima) $(Volumen)
 	sleep 1;
 done
