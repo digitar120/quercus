@@ -10,6 +10,41 @@ OPT_1=$1
 OPT_2=$2
 OPT_3=$3
 
+Help(){
+echo "
+Opciones posibles
+
+br: Control de brillo (/sys/class/backlight)
+-- get: Imprimir el valor actual
+-- set: Definir un nuevo valor
+-- add: Sumar al valor actual
+
+cal: Mostrar un calendario sencillo y esperar.
+
+proc: Uso del procesador
+-- use: Porcentaje de uso del procesador.
+-- warn: Si el uso del procesador supera el 75%, imprimir "P".
+
+mem: Uso de la memoria
+-- use: Porcentaje de uso de la memoria y el intercambio.
+-- barwarn: Advertencia de uso de memoria en letras.
+
+time: Imprime hora u hora y fecha.
+-- short: Imprime horas y minutos.
+-- full: Imprime hora, día de la semana, mes y año.
+
+bat: Imprime uso de la batería y actividad del cargador.
+
+ips: Imprime IPs asociadas a interfaces.
+
+temp: Opciones en cuanto a la temperatura.
+-- exec_once: Adquirir la temperatura y guardarla en $CLIMA
+-- exec: ejecutar exec_once cada 5 minutos.
+-- get: imprimir $CLIMA
+
+help: Imprimir esta ayuda.	
+"
+}
 
 BrGet(){
 	cat $BR_DIR
@@ -75,7 +110,7 @@ BarMemWarn(){
 	}' | tr '\n' ' '
 }
 
-MemWarn(){
+MemUsef(){
 free -m | awk '
 	NR==2 {
 		mempc=int(($3/$2)*100)
@@ -87,6 +122,8 @@ free -m | awk '
 	}
 	'
 }
+
+
 
 FullDateTime(){
 	date "+%H:%M, %A %d de %B"
@@ -146,24 +183,22 @@ case $1 in
 		Calendar
 	;;
 	proc)
-	case $2 in
-		warn)
-			ProcWarn
-		;;
-		use)
-			ProcUse
-		;;
-		*)
-		exit 1
-		;;
-	esac
+		case $2 in
+			warn)
+				ProcWarn
+			;;
+			use)
+				ProcUse
+			;;
+			*)
+			exit 1
+			;;
+		esac
 	;;
 	mem)
 		case $2 in
-			#use)
-			#;;
-			warn)
-				MemWarn
+			use)
+				MemUse
 			;;
 			barwarn)
 				BarMemWarn
@@ -194,7 +229,7 @@ case $1 in
 		IPs
 	;;
 	
-	clima)
+	temp)
 		case $2 in
 		
 		"exec")
@@ -213,6 +248,9 @@ case $1 in
 			exit 1
 		;;
 		esac
+	;;
+	"help")
+		Help
 	;;
 	
 	*)
