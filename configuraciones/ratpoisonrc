@@ -47,7 +47,8 @@ bind XF86MonBrightnessDown exec ./Scripts/bajar-brillo.sh
 #bind s-XF86AudioLowerVolume exec pamixer --set-volume 10
 #bind M exec pamixer --sink 1 --toggle-mute
 
-bind a exec ratpoison -c "echo $(./Scripts/información-de-estado.sh)"
+
+bind a exec ratpoison -c "bash funciones.sh sysstatus"
 
 bind c exec xterm
 		
@@ -81,3 +82,4 @@ unmanage stalonetray
 exec stalonetray --geometry 224+802 --icon-size 18 --background "#1d1f21"
 exec nm-applet
 exec pasystray --key-grabbing --no-icon-tooltip
+exec bash funciones.sh temp exec
