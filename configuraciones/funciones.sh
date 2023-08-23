@@ -1,9 +1,16 @@
 . ../configuraciones/variables.sh
 
 BR_DIR=$DIRECTORIO_BRILLO/brightness
+
 BR=$(cat $DIRECTORIO_BRILLO/brightness)
 BRM=$(cat $DIRECTORIO_BRILLO/max_brightness)
 BRS=$(cat $DIRECTORIO_BRILLO/device/status)
+
+BAT=$(cat $DIRECTORIO_BATERIA/charge_now)
+BATF=$(cat $DIRECTORIO_BATERIA/charge_full)
+BATS=$(cat $DIRECTORIO_BATERIA/status)
+
+
 
 # No se pueden usar los parámetros dados desde dentro de una función
 OPT_1=$1
@@ -47,8 +54,13 @@ help: Imprimir esta ayuda.
 }
 
 BrGet(){
-	cat $BR_DIR
+	awk -v br=$BR -v brm=$BRM 'BEGIN {print int((br/brm)*100) }'
 }
+
+BrGetPretty(){
+	echo "BRI" $(BrGet)
+}
+
 
 BrSet(){
 	echo $OPT_3 > $BR_DIR
@@ -59,18 +71,14 @@ BrAdd(){
 }
 
 BatStatus(){
-echo $BR \
-	$BRM \
-	$BRS \
-	| tr '\n' ' ' | awk '
-		{
-			chargepc= int(($1/$2)*100)
-			if ($3=="connected")
-				print "BAT " chargepc ", CARGANDO"
+	awk -v bat=$BAT -v batf=$BATF -v bats=$BATS 'BEGIN {
+		chargepc=int((bat/batf)*100)
+		if (bats =="Charging" || bats == "Full")
+					print "BAT " chargepc ", CARGANDO"
 
-			else
-				print "BAT " chargepc
-		}' 
+				else
+					print "BAT " chargepc
+	}'
 }
 
 ProcUse(){
@@ -78,9 +86,9 @@ ProcUse(){
 	NR==3 {
 		print "PROC " $2	
 	}'
-	}
+}
 
-	ProcWarn(){
+ProcWarn(){
 	top -bn1 | \
 		awk 'NR==3 {
 			if ($2 > 75)
@@ -134,7 +142,7 @@ ShortTime(){
 }
 
 IPs(){
-	ip a | awk '/inet/ && $2 !~ /127.0.0.1/ {
+	ip a | awk '$1=="inet" && $2 !~ /127.0.0.1/ {
 		print $NF " " substr($2,1,match($2,"/")-1)
 	}'
 }
@@ -160,13 +168,29 @@ Calendar(){
 	read -p "Presione cualquier tecla para cerrar."
 }
 
+SysStatus(){
+	FullDateTime
+	BatStatus
+	BrGetPretty
+	ProcUse
+	MemUse
+	IPs
+	ClimaPrint
+}
+
 
 
 case $1 in
+	sysstatus)
+		SysStatus
+	;;
 	br)
 		case $2 in
 			get)
 				BrGet
+			;;
+			get_pretty)
+				BrGetPretty
 			;;
 			"set")	
 				BrSet
