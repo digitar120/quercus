@@ -110,7 +110,7 @@ BarMemWarn(){
 	}' | tr '\n' ' '
 }
 
-MemUsef(){
+MemUse(){
 free -m | awk '
 	NR==2 {
 		mempc=int(($3/$2)*100)
