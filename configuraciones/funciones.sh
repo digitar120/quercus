@@ -25,6 +25,7 @@ br: Control de brillo (/sys/class/backlight)
 -- get: Imprimir el valor actual
 -- set: Definir un nuevo valor
 -- add: Sumar al valor actual
+-- auth: ejecutar chmod 777 sobre el archivo de interface
 
 cal: Mostrar un calendario sencillo y esperar.
 
@@ -47,7 +48,7 @@ ips: Imprime IPs asociadas a interfaces.
 temp: Opciones en cuanto a la temperatura.
 -- exec_once: Adquirir la temperatura y guardarla en $CLIMA
 -- exec: ejecutar exec_once cada 5 minutos.
--- get: imprimir $CLIMA
+-- get: imprimir \$CLIMA
 
 help: Imprimir esta ayuda.	
 "
@@ -63,11 +64,38 @@ BrGetPretty(){
 
 
 BrSet(){
-	echo $OPT_3 > $BR_DIR
+	awk -v br=$BR -v brm=$BRM -v val=$OPT_3 'BEGIN {
+		ratio=100/brm
+		setResult=int( val/ratio )
+		if (setResult>brm)
+			print brm	
+		else if (setResult<1)
+			print 1
+		else
+			print setResult
+	}' \
+	> $BR_DIR
 }
 
 BrAdd(){
-	awk -v br=$BR -v val=$OPT_3 'BEGIN {print br + val}' > $BR_DIR
+	awk -v br=$BR -v brm=$BRM -v val=$OPT_3 'BEGIN {
+		ratio=100/brm
+		addResult=int((int(br*ratio) + val)/ratio)
+		
+		# Evitar dar valores fuera de márgen
+		if (addResult>brm)
+			print brm
+			
+		else if (addResult<1)
+			print 1
+		else
+			print addResult
+	}' 
+	> $BR_DIR
+}
+
+BrAuth(){
+	sudo su -c '. variables.sh && chmod 777 $DIRECTORIO_BRILLO/brightness'
 }
 
 BatStatus(){
@@ -197,6 +225,9 @@ case $1 in
 			;;
 			add)
 				BrAdd
+			;;
+			auth)
+				BrAuth
 			;;
 			*)
 				exit 1
