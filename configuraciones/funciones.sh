@@ -1,4 +1,4 @@
-. ../configuraciones/variables.sh
+. $HOME/Scripts/funciones-linux/configuraciones/variables.sh
 
 BR_DIR=$DIRECTORIO_BRILLO/brightness
 
