@@ -176,7 +176,7 @@ IPs(){
 }
 
 ClimaAcqOnce(){
-	CLIMA=$(w3m -dump -4 tn.com.ar/clima | awk 'NR==16 {print $1}');
+	w3m -dump -4 tn.com.ar/clima | awk 'NR==16 {print $1}' > /tmp/clima
 }
 
 ClimaAcq () {
@@ -188,7 +188,7 @@ ClimaAcq () {
 }
 
 ClimaPrint(){
-	echo $CLIMA
+	cat /tmp/clima
 }
 
 Calendar(){
