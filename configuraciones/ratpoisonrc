@@ -9,7 +9,7 @@ set fwcolor red
 
 set bargravity c
 
-startup_message off
+startupmessage off
 
 set padding 0 38 0 0 
 
@@ -35,20 +35,12 @@ bind M-s sselect
 bind M-d sdump
 bind M-D sfdump
 
-bind s-XF86MonBrightnessUp exec ./Scripts/brillo.sh 225 
-bind s-XF86MonBrightnessDown exec ./Scripts/brillo.sh 50 
-bind XF86MonBrightnessUp exec ./Scripts/subir-brillo.sh
-bind XF86MonBrightnessDown exec ./Scripts/bajar-brillo.sh
+bind s-XF86MonBrightnessUp exec bash $HOME/Scripts/funciones-linux/configuraciones/funciones.sh br set 10 
+bind s-XF86MonBrightnessDown exec bash $HOME/Scripts/funciones-linux/configuraciones/funciones.sh br set 75
+bind XF86MonBrightnessUp exec bash $HOME/Scripts/funciones-linux/configuraciones/funciones.sh br add 10
+bind XF86MonBrightnessDown exec bash $HOME/Scripts/funciones-linux/configuraciones/funciones.sh br add -10
 
-#bind XF86AudioMute exec pamixer --toggle-mute && ratpoison -c "echo $(pamixer --get-mute | awk '{if ($1 == "true") print "MUTE ON"; else print "MUTE OFF"}')"
-#bind XF86AudioRaiseVolume exec pamixer --set-volume $(pamixer --get-volume | awk '{print $1+10}') 
-#bind XF86AudioLowerVolume exec pamixer --set-volume $(pamixer --get-volume | awk '{print $1-10}')
-#bind s-XF86AudioRaiseVolume exec pamixer --set-volume 60
-#bind s-XF86AudioLowerVolume exec pamixer --set-volume 10
-#bind M exec pamixer --sink 1 --toggle-mute
-
-
-bind a exec ratpoison -c "bash funciones.sh sysstatus"
+bind a exec ratpoison -c "bash $HOME/Scripts/funciones-linux/configuraciones/funciones.sh sysstatus"
 
 bind c exec xterm
 		
@@ -67,7 +59,7 @@ exec setxkbmap latam
 exec xclip
 exec wmname Ratpoison
 exec xrdb .Xdefaults
-exec xterm -e sudo chmod 766 /sys/class/backlight/radeon_bl0/brightness && echo 75 > /sys/class/backlight/radeon_bl0/brightness
+exec xterm -e bash $HOME/Scripts/funciones-linux/configuraciones/funciones.sh br auth
 
 exec nitrogen --restore
 
@@ -76,10 +68,10 @@ exec lxqt-policykit-agent
 
 # PROGRAMAS DE LA SESIÓN
 unmanage bar
-exec /home/gabriel/.lemonbar.sh | lemonbar -p -g 802x18 -B "#1d1f21" -f Terminus:size=10 | $SHELL
+exec bash /home/gabriel/.lemonbar.sh | lemonbar -p -g 802x18 -B "#1d1f21" -f Terminus:size=10 | $SHELL
 
 unmanage stalonetray
 exec stalonetray --geometry 224+802 --icon-size 18 --background "#1d1f21"
 exec nm-applet
 exec pasystray --key-grabbing --no-icon-tooltip
-exec bash funciones.sh temp exec
+exec bash $HOME/Scripts/funciones-linux/configuraciones/funciones.sh temp exec
