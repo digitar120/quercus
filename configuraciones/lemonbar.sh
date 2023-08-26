@@ -1,9 +1,9 @@
-# Importar llaves de configuración
-. variables.sh
-	# DIR_FUNC
+#!/bin/bash
+
+source $HOME/Scripts/funciones-linux/configuraciones/variables.sh
 
 Reloj(){
-. funciones.sh date short | \
+$FUNCIONES time short | \
 	awk '{
 		print "%{A:xterm -e bash funciones.sh cal:}%{F#FFFFFF}" $1 "%{A}"
 	}'
@@ -11,19 +11,13 @@ Reloj(){
 	
 	
 Volumen () {
-(pamixer --get-volume --get-mute && pamixer --source 1 --get-mute) 
-	| tr '\n' ' '  | \
-	
-	awk '{
+(pamixer --get-volume --get-mute && pamixer --source 1 --get-mute) | tr '\n' ' '  | awk '{
 		print "%{A:xterm -e pulsemixer &:}%{F#BEBEBE}VOL%{F#FFFFFF}" $2 "%{A}"; 
 		if ($1=="true") print "%{A:bash pamixer --toggle-mute &:}%{F#DCDC66}PARL%{A}";
 			# Si el parlante por defecto está silenciado, mostrar una alerta.
-			
  		if ($3=="false") print "%{A:pamixer --source 1 --toggle-mute &:}%{F#DCDC66}MICR%{A}"
  			# Si el micrófono por defecto NO está silenciado, mostrar una alerta.
- 		}' \ 
- 	
- 	| tr '\n' ' '
+ 		}' | tr '\n' ' '
 }
 
 
@@ -68,12 +62,12 @@ DireccionesIP (){
 }
 
 Clima () {
-	cat /tmp/clima-out | awk 'NR==15 {print "%{A:xterm -e less /tmp/clima-out:}%{F#BEBEBE}" $1 "%{A}%{F}" }'
+	awk -v clima=$($FUNCIONES temp get) 'BEGIN {print "%{A:xterm -e w3m tn.com.ar/clima:}%{F#BEBEBE}" clima "%{A}%{F}" }'
 }
 	
 while true;
 	do
-	echo $(Reloj) $(Bateria) $(Procesador) $(Memoria);
+	echo " " $(Reloj) $(Bateria) $(Clima) $(Procesador) $(Memoria)
 	# $(Clima) $(Volumen)
 	sleep 1;
 done
