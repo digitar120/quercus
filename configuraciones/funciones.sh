@@ -46,9 +46,9 @@ bat: Imprime uso de la batería y actividad del cargador.
 ips: Imprime IPs asociadas a interfaces.
 
 temp: Opciones en cuanto a la temperatura.
--- exec_once: Adquirir la temperatura y guardarla en $CLIMA
+-- exec_once: Adquirir la temperatura y guardarla en /tmp/temp
 -- exec: ejecutar exec_once cada 5 minutos.
--- get: imprimir \$CLIMA
+-- get: imprimir /tmp/temp
 
 help: Imprimir esta ayuda.	
 "
@@ -175,20 +175,20 @@ IPs(){
 	}'
 }
 
-ClimaAcqOnce(){
-	w3m -dump -4 tn.com.ar/clima | awk 'NR==16 {print $1}' > /tmp/clima
+TempAcqOnce(){
+	w3m -dump -4 tn.com.ar/clima | awk 'NR==16 {print $1}' > /tmp/temp
 }
 
-ClimaAcq () {
+TempAcq () {
 	while :
 		do
-		ClimaAcqOnce;
+		TempAcqOnce;
 		sleep 320;
 	done
 }
 
-ClimaPrint(){
-	cat /tmp/clima
+TempPrint(){
+	cat /tmp/temp
 }
 
 Calendar(){
@@ -203,7 +203,7 @@ SysStatus(){
 	ProcUse
 	MemUse
 	IPs
-	ClimaPrint
+	TempPrint
 }
 
 
@@ -288,15 +288,15 @@ case $1 in
 		case $2 in
 		
 		"exec")
-			ClimaAcq
+			TempAcq
 		;;
 		
 		"exec_once")
-			ClimaAcqOnce
+			TempAcqOnce
 		;;
 		
 		get)
-			ClimaPrint
+			TempPrint
 		;;
 		
 		*)
