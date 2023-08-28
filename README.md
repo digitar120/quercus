@@ -1,13 +1,8 @@
 # funciones-linux
-Una colección de configuraciones y funciones para programas en Linux.
+Una colección de scripts para Linux, especialmente para un escritorio personalizado, basado en el administrador de ventanas Ratpoison y en la barra de estado Lemonbar. 
 
-Diseñé la mayoría de los componentes para agregar funcionalidades a dos programas de interfaz gráfica minimalistas. Esto fué para conseguir una interfaz lo más eficiente posible para usarla en una computadora de muy baja potencia.
+Ratpoison es un administrador de ventanas con un comportamiento similar a Tmux.
 
-Los dos scripts más complejos son:
-- */configuraciones/lemonbar.sh*
-- */configuraciones/ratpoisonrc*
+Lemonbar es una barra de estado que muestra texto formateado, y da la posibilidad de crear botones sencillos
 
-Ratpoison es un administrador de ventanas minimalista. Un administrador de ventanas cumple la función de decidir cómo se comportan las ventanas en un escritorio, y generalmente de iniciar programas y mostrar informaciones.
-
-Lemonbar es una barra de estado, que da una función parecida a la barra de tareas en Windows.
-
+![[Pasted image 20230827214907.png]]

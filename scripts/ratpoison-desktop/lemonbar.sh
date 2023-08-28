@@ -1,15 +1,15 @@
 #!/bin/bash
 
-source $HOME/Scripts/funciones-linux/configuraciones/variables.sh
+source $HOME/Scripts/funciones-linux/scripts/ratpoison-desktop/variables.sh
 
 #Colores para la barra
-BLANCO='-v blanco=FFFFFF'
-GRIS='-v gris=BEBEBE'
-AMARILLO='-v amarillo=DCDC66'
-AZUL='-v azul=0080FF'
-ROJO='-v rojo=FF0000'
+BLANCO='-vblanco=FFFFFF'
+GRIS='-vgris=BEBEBE'
+AMARILLO='-vamarillo=DCDC66'
+AZUL='-vazul=0080FF'
+ROJO='-vrojo=FF0000'
 
-AWK_TEMP='-v temp='$($FUNCIONES temp get)
+AWK_TEMP='-vtemp='$($FUNCIONES temp get)
 
 Reloj(){
 $FUNCIONES time short | \
@@ -28,7 +28,7 @@ free -m | \
 	NR==3{
 		swappc= int(($3/$2)*100)
 		if (swappc >= 25)
-			print "%{F#"  blanco  "}SWAP%{F}"
+			print "%{F#"  amarillo  "}SWAP%{F}"
 	}
 	' | tr '\n' ' '
 }
