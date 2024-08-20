@@ -1,3 +1,8 @@
+# Script de funciones
+# Un script de ayuda que adquiere información del sistema, como estado de la batería, uso del procesador y de la memoria, etc. Acorta los keybindings en el archivo de configuración de Ratpoison
+#
+# A helper script that retrieves system info, such as battery status, processor and memory use, etc. Shortens keybindings on the Ratpoison config file
+
 . $HOME/Scripts/funciones-linux/scripts/ratpoison-desktop/variables.sh
 
 BR_DIR=$DIRECTORIO_BRILLO/brightness

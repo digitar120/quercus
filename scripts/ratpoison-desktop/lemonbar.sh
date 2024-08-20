@@ -1,4 +1,7 @@
 #!/bin/bash
+# Lemonbar es un programa parecido a una barra de tareas, cuya información escrita es definida por texto que se le da con una pipe. Este sirve para acumular esa información y para pasársela al programa
+#
+# Lemonbar is a program that's sort of a task bar, which information written is given to it via a pipe. This script accumulates that information and serves it to Lemonbar.
 
 source $HOME/Scripts/funciones-linux/scripts/ratpoison-desktop/variables.sh
 
