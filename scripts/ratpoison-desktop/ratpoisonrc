@@ -11,7 +11,7 @@ set bargravity c
 
 startupmessage off
 
-set padding 0 38 0 0 
+set padding 10 28 10 10 
 
 	
 
@@ -21,13 +21,19 @@ escape Super_L
 bind s-l exec slock
 bind XF86Sleep exec slock & systemctl suspend
 bind s-XF86PowerOff exec systemctl poweroff
+bind C-M-h exec systemctl hibernate
 
-exec /usr/bin/rpws init 4 -k
+exec /usr/bin/rpws init 9 -k
 	
-bind C-1 exec rpws 1
-bind C-2 exec rpws 2
-bind C-3 exec rpws 3
-bind C-4 exec rpws 4
+bind s-1 exec rpws 1
+bind s-2 exec rpws 2
+bind s-3 exec rpws 3
+bind s-4 exec rpws 4
+bind s-5 exec rpws 5
+bind s-6 exec rpws 6
+bind s-7 exec rpws 7
+bind s-8 exec rpws 8
+bind s-9 exec rpws 9
 
 bind M-Right nextscreen
 bind M-Left prevscreen
@@ -42,11 +48,12 @@ bind XF86MonBrightnessDown exec bash $HOME/Scripts/funciones-linux/scripts/ratpo
 
 bind a exec ratpoison -c bash $HOME/Scripts/funciones-linux/scripts/ratpoison-desktop/funciones.sh sysstatus
 
-bind c exec xterm
+bind s-Return exec xterm
 		
+# Abstraer mediante un script que detecte el tamaño del recuadro enfocado
 bind M-1 exec Xephyr :1 -screen 1362x746 -ac -br &
 
-bind s-r exec xfce4-appfinder
+bind s-d exec rofi -show run
 
 bind s-e exec rox
 bind e exec rox
@@ -68,6 +75,7 @@ exec lxqt-policykit-agent
 
 # PROGRAMAS DE LA SESIÓN
 unmanage bar
+# Abstaer ejecución de lemonbar con un script que detecte el tamaño del escritorio al iniciar, y cada vez que cambia
 exec bash /home/gabriel/.lemonbar.sh | lemonbar -p -g 802x18 -B "#1d1f21" -f Terminus:size=10 | $SHELL
 
 unmanage stalonetray
