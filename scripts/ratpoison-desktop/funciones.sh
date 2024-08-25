@@ -55,6 +55,10 @@ temp: Opciones en cuanto a la temperatura.
 -- exec: ejecutar exec_once cada 5 minutos.
 -- get: imprimir /tmp/temp
 
+scrw: Imprime el ancho de la primer pantalla
+
+scrh: Imprime el alto de la primer pantalla
+
 help: Imprimir esta ayuda.	
 "
 }
@@ -211,6 +215,17 @@ SysStatus(){
 	TempPrint
 }
 
+ScreenWidth(){
+	xrandr | awk 'NR==2 {print substr($4, 1, match($4,"x")-1)}'	
+}
+
+ScreenHeight(){
+	xrandr | awk 'NR==2 {
+		print substr($4,
+		match($4,"x")+1,
+		match($4,"+")-match($4,"x")-1)
+	}'
+}
 
 
 case $1 in
@@ -308,6 +323,12 @@ case $1 in
 			exit 1
 		;;
 		esac
+	;;
+	scrw)
+		ScreenWidth
+	;;
+	scrh)
+		ScreenHeight
 	;;
 	"help")
 		Help
