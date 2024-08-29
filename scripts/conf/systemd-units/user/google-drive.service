@@ -1,0 +1,9 @@
+[Unit]
+Description=Montaje de una unidad Google Drive con RClone
+
+[Service]
+ExecStart=rclone mount google-drive:/ /home/gabriel/google-drive
+
+[Install]
+WantedBy=graphical.target
+
