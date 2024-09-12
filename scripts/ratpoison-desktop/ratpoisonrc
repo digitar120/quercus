@@ -11,7 +11,7 @@ set bargravity c
 
 startupmessage off
 
-set padding 10 28 10 10 
+set padding 20 48 20 20
 
 	
 
@@ -48,7 +48,7 @@ bind XF86MonBrightnessDown exec bash $HOME/Scripts/funciones-linux/scripts/ratpo
 
 bind a exec ratpoison -c bash $HOME/Scripts/funciones-linux/scripts/ratpoison-desktop/funciones.sh sysstatus
 
-bind s-Return exec xterm
+bind s-Return exec alactritty
 		
 # Abstraer mediante un script que detecte el tamaño del recuadro enfocado
 bind M-1 exec Xephyr :1 -screen 1362x746 -ac -br &
@@ -63,23 +63,12 @@ bind e exec rox
 
 # CONFIGURACIÓN DE X
 exec setxkbmap latam
-exec xclip
+exec copyq
 exec wmname Ratpoison
-exec xrdb .Xdefaults
-exec xterm -e bash $HOME/Scripts/funciones-linux/scripts/ratpoison-desktop/funciones.sh br auth
-
+exec alacritty --command bash $HOME/Scripts/funciones-linux/scripts/ratpoison-desktop/funciones.sh br auth
 exec nitrogen --restore
-
 exec lxqt-policykit-agent
-
-
-# PROGRAMAS DE LA SESIÓN
-unmanage bar
-# Abstaer ejecución de lemonbar con un script que detecte el tamaño del escritorio al iniciar, y cada vez que cambia
-exec bash /home/gabriel/.lemonbar.sh | lemonbar -p -g 802x18 -B "#1d1f21" -f Terminus:size=10 | $SHELL
-
-unmanage stalonetray
-exec stalonetray --geometry 224+802 --icon-size 18 --background "#1d1f21"
+exec bash $HOME/Scripts/funciones-linux/scripts/ratpoison-desktop/exec-polybar.sh
 exec nm-applet
 exec pasystray --key-grabbing --no-icon-tooltip
-exec bash $HOME/Scripts/funciones-linux/scripts/ratpoison-desktop/funciones.sh temp exec
+
