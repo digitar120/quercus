@@ -48,7 +48,8 @@ bind XF86MonBrightnessDown exec bash $HOME/Scripts/funciones-linux/scripts/ratpo
 
 bind a exec ratpoison -c bash $HOME/Scripts/funciones-linux/scripts/ratpoison-desktop/funciones.sh sysstatus
 
-bind s-Return exec alactritty
+bind s-Return exec alacritty
+unbind s-c
 		
 # Abstraer mediante un script que detecte el tamaño del recuadro enfocado
 bind M-1 exec Xephyr :1 -screen 1362x746 -ac -br &
@@ -62,13 +63,12 @@ bind e exec rox
 
 
 # CONFIGURACIÓN DE X
+exec bash $HOME/Scripts/funciones-linux/scripts/ratpoison-desktop/exec-polybar.sh
+exec wmname Ratpoison
 exec setxkbmap latam
 exec copyq
-exec wmname Ratpoison
-exec alacritty --command bash $HOME/Scripts/funciones-linux/scripts/ratpoison-desktop/funciones.sh br auth
 exec nitrogen --restore
 exec lxqt-policykit-agent
-exec bash $HOME/Scripts/funciones-linux/scripts/ratpoison-desktop/exec-polybar.sh
 exec nm-applet
 exec pasystray --key-grabbing --no-icon-tooltip
-
+exec alacritty --command bash $HOME/Scripts/funciones-linux/scripts/ratpoison-desktop/funciones.sh br auth
