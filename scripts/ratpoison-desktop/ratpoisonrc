@@ -41,6 +41,18 @@ bind M-s sselect
 bind M-d sdump
 bind M-D sfdump
 
+bind s-z undo
+bind s-y redo
+bind s-q only
+unbind q
+bind s-w windows
+unbind w
+
+bind S-s-Down exec ratpoison -c split && ratpoison -c focusdown
+bind S-s-Up exec ratpoison -c split && ratpoison -c exchangedown && ratpoison -c focusup
+bind S-s-Right exec ratpoison -c hsplit && ratpoison -c focusright
+bind S-s-Left exec ratpoison -c hsplit && ratpoison -c exchangeright && ratpoison -c focusleft
+
 bind s-XF86MonBrightnessUp exec bash $HOME/Scripts/funciones-linux/scripts/ratpoison-desktop/funciones.sh br set 10 
 bind s-XF86MonBrightnessDown exec bash $HOME/Scripts/funciones-linux/scripts/ratpoison-desktop/funciones.sh br set 75
 bind XF86MonBrightnessUp exec bash $HOME/Scripts/funciones-linux/scripts/ratpoison-desktop/funciones.sh br add 10
@@ -49,20 +61,18 @@ bind XF86MonBrightnessDown exec bash $HOME/Scripts/funciones-linux/scripts/ratpo
 bind a exec ratpoison -c bash $HOME/Scripts/funciones-linux/scripts/ratpoison-desktop/funciones.sh sysstatus
 
 bind s-Return exec alacritty
-unbind s-c
+unbind c
 		
 # Abstraer mediante un script que detecte el tamaño del recuadro enfocado
 bind M-1 exec Xephyr :1 -screen 1362x746 -ac -br &
 
-bind s-d exec rofi -show run
+bind s-D exec jgmenu_run
+bind s-d exec rofi -show run 
 
 bind s-e exec rox
 bind e exec rox
 
 
-
-
-# CONFIGURACIÓN DE X
 exec bash $HOME/Scripts/funciones-linux/scripts/ratpoison-desktop/exec-polybar.sh
 exec wmname Ratpoison
 exec setxkbmap latam
@@ -72,3 +82,5 @@ exec lxqt-policykit-agent
 exec nm-applet
 exec pasystray --key-grabbing --no-icon-tooltip
 exec alacritty --command bash $HOME/Scripts/funciones-linux/scripts/ratpoison-desktop/funciones.sh br auth
+exec xcompmgr -c -f -D 5
+
