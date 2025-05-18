@@ -53,12 +53,12 @@ bind S-s-Up exec ratpoison -c split && ratpoison -c exchangedown && ratpoison -c
 bind S-s-Right exec ratpoison -c hsplit && ratpoison -c focusright
 bind S-s-Left exec ratpoison -c hsplit && ratpoison -c exchangeright && ratpoison -c focusleft
 
-bind s-XF86MonBrightnessUp exec bash $HOME/Scripts/funciones-linux/scripts/ratpoison-desktop/funciones.sh br set 10 
-bind s-XF86MonBrightnessDown exec bash $HOME/Scripts/funciones-linux/scripts/ratpoison-desktop/funciones.sh br set 75
-bind XF86MonBrightnessUp exec bash $HOME/Scripts/funciones-linux/scripts/ratpoison-desktop/funciones.sh br add 10
-bind XF86MonBrightnessDown exec bash $HOME/Scripts/funciones-linux/scripts/ratpoison-desktop/funciones.sh br add -10
+bind s-XF86MonBrightnessUp exec bash $HOME/.config/funciones-linux/ratpoison/funciones.sh br set 10 
+bind s-XF86MonBrightnessDown exec bash $HOME/.config/funciones-linux/ratpoison/funciones.sh br set 75
+bind XF86MonBrightnessUp exec bash $HOME/.config/funciones-linux/ratpoison/funciones.sh br add 10
+bind XF86MonBrightnessDown exec bash $HOME/.config/funciones-linux/ratpoison/funciones.sh br add -10
 
-bind a exec ratpoison -c bash $HOME/Scripts/funciones-linux/scripts/ratpoison-desktop/funciones.sh sysstatus
+bind a exec ratpoison -c bash $HOME/.config/funciones-linux/ratpoison/funciones.sh sysstatus
 
 bind s-Return exec alacritty
 unbind c
@@ -73,7 +73,7 @@ bind s-e exec rox
 bind e exec rox
 
 
-exec bash $HOME/Scripts/funciones-linux/scripts/ratpoison-desktop/exec-polybar.sh
+exec bash $HOME/.config/funciones-linux/ratpoison/exec-polybar.sh
 exec wmname Ratpoison
 exec setxkbmap latam
 exec copyq
@@ -81,6 +81,6 @@ exec nitrogen --restore
 exec lxqt-policykit-agent
 exec nm-applet
 exec pasystray --key-grabbing --no-icon-tooltip
-exec alacritty --command bash $HOME/Scripts/funciones-linux/scripts/ratpoison-desktop/funciones.sh br auth
+# exec alacritty --command bash $HOME/Scripts/funciones-linux/scripts/ratpoison-desktop/funciones.sh br auth
 exec xcompmgr -c -f -D 5
 
