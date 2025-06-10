@@ -1,3 +1,3 @@
-function gcom
-    command git commit -m "$argv"
+function gdiff
+     git diff **$argv**
 end
