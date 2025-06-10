@@ -9,3 +9,4 @@ fi
 read -p "Presione Enter para alternar el estado de $1, o cierre la ventana para cancelar."
 sudo systemctl is-active --quiet $1 && sudo systemctl stop $1 || sudo systemctl start $1
 echo "Estado de $1 : $(sudo systemctl is-active $1)"
+read -p "Presione Enter para cerrar la ventana."
