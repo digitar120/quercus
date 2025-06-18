@@ -1,4 +1,4 @@
-function tmuxs --wraps='tmux new -s a' --description 'alias tmuxs=tmux new -s a'
-  tmux new -s a $argv
+function tmuxs --description 'alias tmuxs=tmux new -s tmuxs'
+  tmux new -s tmuxs $argv
         
 end
