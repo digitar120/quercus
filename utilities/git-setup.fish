@@ -7,7 +7,7 @@ end
 
 git config --global core.pager "less -r"
 git config --global user.name "digitar120"
-git config --global user.mail "digitar120@outlook.com"
+git config --global user.email "digitar120@outlook.com"
 
 # Setup gnome-keyring as a secret manager
 dbus-send --session --print-reply --dest=org.freedesktop.DBus / \
